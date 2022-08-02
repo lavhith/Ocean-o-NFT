@@ -1,5 +1,5 @@
 # Run npm install to install dependencies
 
-# Requires MongoDB
+## Requires MongoDB
 
-# Refer to src/index.js Mongo section for DB information
+### Refer to src/index.js Mongo section for DB information
