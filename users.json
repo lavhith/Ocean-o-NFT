@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "623b59de973962827251e744"
+  },
+  "Username": "VRX11",
+  "Email": "vanshshah@gmail.com",
+  "Password": "Vansh123",
+  "Balance": "450",
+  "Owned": 4,
+  "Bio": "",
+  "displayImage":"default.png"
+},{
+  "_id": {
+    "$oid": "623b60dfbe267340d02bc70e"
+  },
+  "Username": "Salim69",
+  "Email": "Salim@gmail.com",
+  "Password": "Salim420",
+  "Balance": "700",
+  "Owned": 4,
+  "Bio": "",
+  "displayImage":"default.png"
+},{
+  "_id": {
+    "$oid": "623d9e4027caccb076c1b514"
+  },
+  "Username": "Sahil19",
+  "Email": "sahilshah@gmail.com",
+  "Password": "Sahil@123",
+  "Balance": "1500",
+  "Owned": 4,
+  "Bio": "",
+  "displayImage":"default.png"
+}]

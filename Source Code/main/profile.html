@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Profile</title>
+        <!-- swiperjs cdn link -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <!-- font awesome cdn link -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+        <!-- google font link -->
+        <link
+                href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
+                rel="stylesheet" />
+
+        <!-- custom css link -->
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+
+    <body data-ng-app="profileApp" data-ng-controller="profileController">
+        <!--Header Starts-->
+        <header class="header bg-white10">
+            <div class="container">
+                <a href="index.html" class="logo bold white">Ocean O'<span class="neonblue">NFT</span></a>
+
+                <div class="menu">
+                    <a href="#profile">My Details</a>
+                    <a href="#balance">My Balance</a>
+                    <a href="#collections">My Collection</a>
+
+                    <a class="btn bg-bluegradient wallet" id="loginBtn" href="index.html" data-ng-click="logout()">Logout</a>
+                </div>
+
+                <div class="fas fa-wallet" id="wallet"></div>
+                <div class="fas fa-bars" id="bar"></div>
+            </div>
+        </header>
+        <!--Header ends-->
+
+        <!--My Profile starts-->
+        <section id="profile" class="spacetop12">
+            <div class="container bg-halferwhite">
+                <img src="img/default.png" alt="" class="img-responsive img-profile spacetop5">
+
+                <div class="container ta-center">
+                    <input type="text" class="bold size5 ta-center space4 padding1 col7 bold white bg-halferwhite rounded-corners" data-ng-model="username">
+                    <h2 class="bold size2 space1">Email : <input type="text" class="btn btn-detail bg-halferwhite white bold" data-ng-model="email" required></h2>
+                    <h2 class="bold size2 space4">Bio : <textarea class="btn btn-detail bg-halferwhite white bold" data-ng-model="bio"></textarea></h2>
+                    <h2 class="bold size2 space4">Owned NFT : <span class="halfwhite">{{owned}}</span></h2>
+                    <h2 class="bold size2 space1">Password : <input type="password" class="btn btn-detail bg-halferwhite white bold not-default" placeholder="Enter password to save" data-ng-model="password"></h2>
+                    <span class="error center form-span" style="font-size: 2rem" data-ng-show="exists">*User already exists!</span>
+                </div>
+                <a class="btn btn-change size2 ta-center bg-bluegradient" data-ng-click="updateDetails()" data-ng-show="checkPass()">
+                    Confirm Changes
+                </a>
+            </div>
+        </section>
+        <!--My Profile ends-->
+
+        <!--My Collection starts-->
+        <section class="collections spacetop10" id="collections">
+            <div class="container spacebottom10">
+                <h1 class="bold size4 ta-center spacebottom5">My Collection</h1>
+                <div class="row box-card jc-evenly-md">
+                    <div class="col4 card collect bg-white10 col5-md col6-s" data-ng-repeat="i in images" data-item="art">
+                        <img data-ng-src="img/{{i.NFT_Image_Name}}" class="img-responsive" alt="" height="360px">
+                        <div class="row jc-between spacetop2">
+                            <div>
+                                <p class="size2 halfwhite">
+                                    @{{i.NFT_Creator_Name}}
+                                </p>
+                                <h5 class="size2 bold">{{i.NFT_Collection_Name}}</h5>
+                                <p class="current halfwhite">Current bid</p>
+                                <h5 class="size2 bold">{{i.NFT_Top_Bid_Amount}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--My Collection ends-->
+
+        <!--My Balance starts-->
+        <section>
+            <div class="container padding5 bg-halferwhite spacebottom5">
+                <h1 class="bold size4 ta-center">My Current Balance</h1>
+                <p class="spacebottom3 halfwhite size4 bold ta-center lightpurple">
+                    {{balance}} ETH
+                </p>
+                <a class="btn bg-bluegradient bold spacebottom3" data-ng-click="refill()">
+                    Refill Wallet
+                </a>
+                <h2 class="bold size2 spacetop5" data-ng-show="activate"><input type="number" placeholder="Enter Credits" min="0.044" step="0.001" class="size2 size2-md col6 col6-md spacebottom3 lightpurple bold bg-halferwhite rounded-corners padding1" data-ng-model="addCredits"><span class="lightpurple size2 ta-center bold spaceleft1">ETH</span></h2>
+                <a class="btn bg-bluegradient bold spacebottom3" data-ng-show="activate" data-ng-click="updateBalance()">
+                    Add credits
+                </a>
+            </div>
+        </section>
+        <!--My Balance ends-->
+
+        <!-- footer section starts -->
+        <footer class="spacer10">
+            <div class="container row jc-between flexcol-s ta-center-s">
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#home" class="size2 bold white">Ocean O'<span class="neonblue">NFT</span></a>
+                    <p class="size2 halfwhite spacetop2">The best NFT marketplace website in<br>the world and feel your
+                        experience
+                        in<br>selling or buy our work</p>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#about" class="bold size2 white">About</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Product</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Resource</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Term & Condition</a>
+                    <a href="#" class="size2 halfwhite spacetop2">FAQ</a>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#" class="bold size2 white">Company</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Our Team</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Partner With Us</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Privacy & Policy</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Features</a>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <h5 class="bold size2">Contact</h5>
+                    <a href="#" class="size2 halfwhite spacetop2">+012 3456789</a>
+                    <a href="#" class="size2 halfwhite spacetop2">xyz@gmail.com</a>
+                    <div class="row jc-between spacetop2 jc-evenly-s">
+                        <a href="#" class="fab fa-youtube size2 halfwhite spacetop2"></a>
+                        <a href="#" class="fab fa-discord size2 halfwhite spacetop2"></a>
+                        <a href="#" class="fab fa-instagram size2 halfwhite spacetop2"></a>
+                    </div>
+                </div>
+            </div>
+            <p class="size2 halfwhite spacetop5 ta-center">Created by <span class="white bold">Vansh, Sahil & Lavhith</span> | All Right
+                Reserved!</p>
+        </footer>
+        <!-- footer section ends -->
+    </body>
+    <!-- custom js file link -->
+    <script src="js/profile.js"></script>
+</html>

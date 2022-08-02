@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- swiperjs cdn link -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <!-- font awesome cdn link -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+        <!-- google font link -->
+        <link
+                href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
+                rel="stylesheet" />
+
+        <!-- custom css link -->
+        <link rel="stylesheet" href="css/style.css" />
+        <title>NFT</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+
+    <body data-ng-app="individualPage" data-ng-controller="individualController">
+        <!-- header section starts -->
+        <header class="header bg-white10">
+            <div class="container">
+                <a href="index.html" class="logo bold white">Ocean O'<span class="neonblue">NFT</span></a>
+
+                <div class="menu">
+                    <a href="#bid">Bid</a>
+                    <a href="#details">Details</a>
+                    <a href="#featured">Featured</a>
+                    <a href="collection.html">Collection</a>
+                    <a class="btn bg-bluegradient wallet" id="loginBtn" href="profile.html">Profile</a>
+                </div>
+
+                <div class="fas fa-wallet" id="wallet"></div>
+                <div class="fas fa-bars" id="bar"></div>
+            </div>
+        </header>
+
+        <!--Individual View Area-->
+        <section class="spacetop12 spacebottom10 send-behind-last" id="bid">
+            <div class="container">
+                <div class="row jc-between ai-center col-reverse-s">
+                    <div class="col5 col6-md col12-s ta-center-s">
+                        <h1 class="size4 size4-md bold spacebottom1">
+                            {{NFTname}}
+                        </h1>
+                        <p class="size2 size2-md spacebottom3 halfwhite bg-halferwhite rounded-corners padding1">
+                            {{NFTdescription}}
+                        </p>
+                    </div>
+                    <div class="col6 col6-md spacebottom3-s bg-halferwhite padding5 rounded-corners">
+                        <img src="img/{{NFTimage}}" alt="" class="img-responsive rounded-corners" height="360px">
+                        <a class="btn btn-place size2 ta-center bg-bluegradient rounded-corners spacetop1" data-ng-click="activate()">
+                            Place Bid
+                        </a>
+                        <div class="container bg-halferwhite padding2 spacetop2" data-ng-show="isBid">
+                            <h2 class="bold size2 size2-md lightpurple spacetop1">Increase Bid By</h2>
+                            <h2 class="bold size2 spacetop1 size2-md"><input type="number" data-ng-model="bidValue" value="0.001" class="btn btn-detail bg-purple white bold col9" step="0.001"><span class="lightpurple"> ETH</span></h2>
+                            <input type="button" class="btn btn-place white bold size2 ta-center bg-purple rounded-corners spacetop1" value="Place" data-ng-click="placeBid()">
+                            <input type="button" class="btn btn-place white bold size2 ta-center bg-purple rounded-corners spacetop1" value="Buyout {{buyOut}} ETH">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Individual View Area ends-->
+
+        <!--Details Section Starts-->
+        <section id="details" class="spacetop15 spacebottom15 send-behind-last">
+            <div class="container bg-halferwhite">
+                    <div class="row jc-between spacebottom5 spacetop10 padding1">
+                        <div class="ta-center padding1">
+                            <p class="size3 bold">Artist Name</p>
+                            <p class="size2 halfwhite">{{artistName}}</p>
+                        </div>
+                        <div class="ta-center padding1">
+                            <p class="size3 bold">Current Top Bidder</p>
+                            <p class="size2 halfwhite">{{bidderName}}</p>
+                        </div>
+                        <div class="ta-center padding1">
+                            <p class="size3 bold">Current Owner</p>
+                            <p class="size2 halfwhite">{{ownerName}}</p>
+                        </div>
+                        <div class="ta-center padding1">
+                            <p class="size3 bold">Top Bid Value</p>
+                            <p class="size2 lightpurple">{{topBidValue}} ETH</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Details Section ends-->
+
+
+        <!--Recommended Section starts-->
+        <section class="featured spacer10" id="featured">
+            <div class="container">
+                <h1 class="bold size4 ta-center">Featured Artworks</h1>
+                <p class="spacebottom3 halfwhite size2 ta-center">
+                    Artworks and Designs from the students at Mukesh Patel School of Technology Management & Engineering.
+                </p>
+                <div class="swiper card-slider row">
+                    <div class="swiper-wrapper">
+                        <div class="col4 col5-md col7-s swiper-slide" ng-repeat = "i in images">
+                            <div class="card bg-white10">
+                                <img src="img/{{i.NFT_Image_Name}}" class="img-responsive rounded-corners" alt="" height="360px">
+                                <div class="row jc-between spacetop2">
+                                    <div>
+                                        <p class="size2 halfwhite">
+                                            @{{i.NFT_Creator_Name}}
+                                        </p>
+                                        <h5 class="size2 bold">{{i.NFT_Collection_Name}}</h5>
+                                        <p class="current halfwhite">Current bid</p>
+                                        <h5 class="size2 bold">{{i.NFT_Top_Bid_Amount}} ETH</h5>
+                                    </div>
+                                </div>
+                                <a class="bid size2 ta-center white" data-ng-click="clickBid(i)" href="individual.html">
+                                    Place a bid
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Recommended Section ends-->
+
+        <!-- footer section starts -->
+        <footer class="spacer10">
+            <div class="container row jc-between flexcol-s ta-center-s">
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#home" class="size2 bold white">Ocean O'<span class="neonblue">NFT</span></a>
+                    <p class="size2 halfwhite spacetop2">The best NFT marketplace website in<br>the world and feel your
+                        experience
+                        in<br>selling or buy our work</p>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#about" class="bold size2 white">About</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Product</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Resource</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Term & Condition</a>
+                    <a href="#" class="size2 halfwhite spacetop2">FAQ</a>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <a href="#" class="bold size2 white">Company</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Our Team</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Partner With Us</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Privacy & Policy</a>
+                    <a href="#" class="size2 halfwhite spacetop2">Features</a>
+                </div>
+                <div class="row flexcol spacebottom3-s">
+                    <h5 class="bold size2">Contact</h5>
+                    <a href="#" class="size2 halfwhite spacetop2">+012 3456789</a>
+                    <a href="#" class="size2 halfwhite spacetop2">xyz@gmail.com</a>
+                    <div class="row jc-between spacetop2 jc-evenly-s">
+                        <a href="#" class="fab fa-youtube size2 halfwhite spacetop2"></a>
+                        <a href="#" class="fab fa-discord size2 halfwhite spacetop2"></a>
+                        <a href="#" class="fab fa-instagram size2 halfwhite spacetop2"></a>
+                    </div>
+                </div>
+            </div>
+            <p class="size2 halfwhite spacetop5 ta-center">Created by <span class="white bold">Vansh, Sahil & Lavhith</span> | All Right
+                Reserved!</p>
+        </footer>
+        <!-- footer section ends -->
+
+        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+        <!-- custom js file link -->
+        <script src="js/script.js"></script>
+        <script src="js/individual.js"></script>
+    </body>
+</html>
